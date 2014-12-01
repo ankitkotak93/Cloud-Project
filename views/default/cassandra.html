@@ -1,0 +1,38 @@
+{{extend 'layout.html'}}
+<br/> <br/> <br/>
+<table width = "50%" border = "0.5"  align=center>
+{{if flag == 1:}}
+{{p=0}}
+{{iter=0}}
+
+{{for x in result:}}
+		{{if page*10 > iter: }}
+			{{iter+=1}}
+		{{elif iter< page*10+10 and iter!=page*10 + 10:}}
+		 <tr>{{for i in x:}}<td>{{=x[i]}}</td>{{pass}} {{iter+=1}} 
+		{{elif iter==10*page+10:}} {{break}}
+		{{pass}}
+		</tr></div>
+ </table>  
+<table width = "50%" border = "0.5"  align=center>
+{{elif flag!=1:}}
+{{iter1=0}}
+{{j=0}}
+<table width = "50%" border = "0.5" align=center>
+	 {{for i in result:}} 
+	{{if 10*page>iter1:}} {{iter1+=1}} 
+	{{elif iter1 < 10+ 10*page and iter!=page*10+ 10:}}<tr><td>{{=i}}</td> <td>{{=result[i]}} {{iter1+=1}}</td>
+	{{elif iter1 == 10*page+10:}} {{break}}
+	{{pass}}</tr></div>
+</table>
+<table width = "50%" border ="0.5 " align=center> {{pass}}
+<table>
+{{if page:}}
+<h3>
+<a href="{{=URL(args=args2,vars={"page":page-1})}}">prev</a>
+</h3>
+{{pass}}
+
+{{if len(result) > 10:}}
+<h3><a href="{{=URL(args=args2,vars={"page":page+1})}}">next</a>
+</h3>{{pass}}
